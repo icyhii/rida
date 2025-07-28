@@ -33,8 +33,8 @@ const BackgroundTransition = memo(() => {
       // Hero to Services - Dark to Light (0-15%)
       { start: 0, end: 0.15, color: 'linear-gradient(135deg, #F8F6F2 0%, #ffffff 30%, #F8F6F2 100%)' },
       
-      // Services to About - Light to Light Grey (15-35%)  
-      { start: 0.15, end: 0.35, color: 'linear-gradient(135deg, #f9fafb 0%, #f3f4f6 30%, #f9fafb 100%)' },
+      // Services to About - Smooth light transition (15-35%)  
+      { start: 0.15, end: 0.35, color: 'linear-gradient(135deg, #fafafa 0%, #f8fafc 25%, #f1f5f9 50%, #f8fafc 75%, #fafafa 100%)' },
       
       // About to Portfolio - Light to Dark (35-55%)
       { start: 0.35, end: 0.55, color: 'linear-gradient(135deg, #1E1E1E 0%, #264343 30%, #1E1E1E 100%)' },
@@ -52,12 +52,12 @@ const BackgroundTransition = memo(() => {
       { start: 0.95, end: 1, color: 'linear-gradient(135deg, #1E1E1E 0%, #264343 30%, #1E1E1E 100%)' }
     ]
 
-    // Create optimized transitions
+    // Create optimized transitions with smoother easing
     transitions.forEach(({ start, end, color }, index) => {
       tlRef.current?.to(background, {
         background: color,
         duration: end - start,
-        ease: 'power1.inOut',
+        ease: index === 1 ? 'power2.inOut' : 'power1.inOut', // Smoother easing for Services to About
         force3D: true,
       }, start)
     })

@@ -50,15 +50,22 @@ export default function About() {
   })
 
   return (
-    <section className="section-padding relative overflow-hidden">
-      {/* Add ID for smooth transitions */}
-      <div id="about" className="absolute top-0 left-0 w-full h-1"></div>
+    <section id="about" className="section-padding relative overflow-hidden">
+      {/* Improved Background Elements for better transition */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-32 -right-32 w-96 h-96 bg-gray-100/20 rounded-full opacity-40"></div>
+        <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-gray-50/30 rounded-full opacity-40"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-128 h-96 bg-gradient-to-r from-gray-50/10 to-gray-100/10 rounded-full opacity-30"></div>
+      </div>
       
-      {/* Background Pattern with opacity control */}
-      <div className="absolute inset-0 opacity-5">
+      {/* Subtle pattern overlay */}
+      <div className="absolute inset-0 opacity-[0.015]">
         <div 
-          className="absolute inset-0 bg-repeat opacity-10"
-          style={{ backgroundImage: `url(${aboutImages.patternTexture})` }}
+          className="absolute inset-0 bg-repeat"
+          style={{ 
+            backgroundImage: `url(${aboutImages.patternTexture})`,
+            backgroundSize: '60px 60px'
+          }}
         ></div>
       </div>
       
@@ -66,13 +73,13 @@ export default function About() {
         {/* Section Header */}
         <motion.div
           ref={ref}
-          className="text-center mb-16"
+          className="text-center mb-20"
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
           <motion.h2 
-            className="heading-primary mb-6"
+            className="text-4xl lg:text-6xl font-display font-bold text-gray-900 mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -102,18 +109,18 @@ export default function About() {
             {values.map((value, index) => (
               <motion.div
                 key={index}
-                className="group text-center"
+                className="group text-center p-6 rounded-2xl hover:bg-white/80 hover:shadow-xl transition-all duration-500 backdrop-blur-sm border border-gray-100/50 hover:border-primary-200/50"
                 initial={{ opacity: 0, y: 30 }}
                 animate={valuesInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.8 + index * 0.1 }}
-                whileHover={{ y: -10 }}
+                whileHover={{ y: -10, scale: 1.02 }}
               >
                 <div className="relative mb-6">
-                  <div className="w-16 h-16 mx-auto bg-primary-100 rounded-2xl flex items-center justify-center group-hover:bg-primary-200 transition-colors duration-300">
-                    <value.icon className="w-8 h-8 text-primary-600" />
+                  <div className="w-20 h-20 mx-auto bg-white rounded-3xl flex items-center justify-center group-hover:bg-primary-50 transition-all duration-300 shadow-lg border border-gray-100 group-hover:border-primary-200 group-hover:shadow-xl">
+                    <value.icon className="w-10 h-10 text-primary-600 group-hover:scale-110 transition-transform duration-300" />
                   </div>
                 </div>
-                <h3 className="text-xl font-display font-bold text-gray-900 mb-3">
+                <h3 className="text-xl font-display font-bold text-gray-900 mb-4 group-hover:text-primary-600 transition-colors duration-300">
                   {value.title}
                 </h3>
                 <p className="text-gray-600 leading-relaxed">
@@ -138,7 +145,7 @@ export default function About() {
             animate={teamInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 1.2 }}
           >
-            <h3 className="text-3xl font-display font-bold text-gray-900 mb-6">
+            <h3 className="text-3xl lg:text-4xl font-display font-bold text-gray-900 mb-6">
               Meet Our Creative Minds
             </h3>
             <p className="text-lg text-gray-600 mb-8 leading-relaxed">
@@ -146,15 +153,36 @@ export default function About() {
               decades of experience in crafting digital experiences that drive results and inspire audiences.
             </p>
             
+            {/* Stats Section */}
+            <motion.div 
+              className="grid grid-cols-3 gap-6 mb-8 p-6 bg-white/60 rounded-2xl backdrop-blur-sm border border-gray-100"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={teamInView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ duration: 0.8, delay: 1.6 }}
+            >
+              <div className="text-center">
+                <div className="text-2xl font-bold text-primary-600 mb-1">50+</div>
+                <div className="text-sm text-gray-600">Projects</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-primary-600 mb-1">5+</div>
+                <div className="text-sm text-gray-600">Years</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-primary-600 mb-1">12+</div>
+                <div className="text-sm text-gray-600">Team</div>
+              </div>
+            </motion.div>
+            
             {/* Team Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-6">
               {aboutImages.team.map((member, index) => (
                 <motion.div
                   key={index}
-                  className="flex items-center space-x-4 p-4 rounded-xl hover:bg-gray-50 transition-colors duration-300"
+                  className="flex items-center space-x-4 p-4 rounded-xl hover:bg-white/80 transition-all duration-300 border border-transparent hover:border-gray-100 hover:shadow-md backdrop-blur-sm"
                   initial={{ opacity: 0, y: 20 }}
                   animate={teamInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.6, delay: 1.4 + index * 0.1 }}
+                  transition={{ duration: 0.6, delay: 1.8 + index * 0.1 }}
                 >
                   <img
                     src={member.image}
@@ -177,23 +205,31 @@ export default function About() {
             animate={teamInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 1.4 }}
           >
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-gray-200">
               <img
                 src={aboutImages.teamPhoto}
                 alt="Rida Digital Team"
                 className="w-full h-auto object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary-900/20 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-gray-900/10 to-transparent"></div>
+              
+              {/* Overlay text */}
+              <div className="absolute bottom-6 left-6 right-6">
+                <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-4 border border-gray-200/50">
+                  <p className="text-sm font-medium text-gray-900">Creative Excellence</p>
+                  <p className="text-xs text-gray-600 mt-1">Building digital experiences that matter</p>
+                </div>
+              </div>
             </div>
             
-            {/* Floating Elements */}
+            {/* Floating Elements with improved design */}
             <motion.div
-              className="absolute -top-6 -right-6 w-24 h-24 bg-primary-100 rounded-2xl opacity-60"
+              className="absolute -top-8 -right-8 w-24 h-24 bg-primary-100/80 rounded-3xl opacity-80 backdrop-blur-sm border border-primary-200/50"
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             />
             <motion.div
-              className="absolute -bottom-6 -left-6 w-16 h-16 bg-accent-200 rounded-xl opacity-80"
+              className="absolute -bottom-8 -left-8 w-20 h-20 bg-accent-100/80 rounded-2xl opacity-80 backdrop-blur-sm border border-accent-200/50"
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
             />
