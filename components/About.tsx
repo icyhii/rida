@@ -50,21 +50,21 @@ export default function About() {
   })
 
   return (
-    <section id="about" className="section-padding relative overflow-hidden">
+    <section id="about" className="section-padding relative overflow-hidden bg-gray-50/30">
       {/* Improved Background Elements for better transition */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-32 -right-32 w-96 h-96 bg-gray-100/20 rounded-full opacity-40"></div>
-        <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-gray-50/30 rounded-full opacity-40"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-128 h-96 bg-gradient-to-r from-gray-50/10 to-gray-100/10 rounded-full opacity-30"></div>
+        <div className="absolute -top-32 -right-32 w-96 h-96 bg-primary-100/10 rounded-full opacity-30"></div>
+        <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-gray-100/20 rounded-full opacity-30"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-128 h-96 bg-gradient-to-r from-primary-50/5 to-gray-100/5 rounded-full opacity-40"></div>
       </div>
       
       {/* Subtle pattern overlay */}
-      <div className="absolute inset-0 opacity-[0.015]">
+      <div className="absolute inset-0 opacity-[0.008]">
         <div 
           className="absolute inset-0 bg-repeat"
           style={{ 
             backgroundImage: `url(${aboutImages.patternTexture})`,
-            backgroundSize: '60px 60px'
+            backgroundSize: '80px 80px'
           }}
         ></div>
       </div>
@@ -109,21 +109,24 @@ export default function About() {
             {values.map((value, index) => (
               <motion.div
                 key={index}
-                className="group text-center p-6 rounded-2xl hover:bg-white/80 hover:shadow-xl transition-all duration-500 backdrop-blur-sm border border-gray-100/50 hover:border-primary-200/50"
+                className="group text-center p-8 rounded-2xl bg-white/90 hover:bg-white hover:shadow-2xl transition-all duration-500 border border-gray-200/50 hover:border-primary-300/50 backdrop-blur-sm"
                 initial={{ opacity: 0, y: 30 }}
                 animate={valuesInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.8 + index * 0.1 }}
-                whileHover={{ y: -10, scale: 1.02 }}
+                whileHover={{ y: -8, scale: 1.02 }}
+                style={{
+                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
+                }}
               >
                 <div className="relative mb-6">
-                  <div className="w-20 h-20 mx-auto bg-white rounded-3xl flex items-center justify-center group-hover:bg-primary-50 transition-all duration-300 shadow-lg border border-gray-100 group-hover:border-primary-200 group-hover:shadow-xl">
+                  <div className="w-20 h-20 mx-auto bg-primary-50 rounded-3xl flex items-center justify-center group-hover:bg-primary-100 transition-all duration-300 shadow-md border border-primary-100 group-hover:border-primary-200 group-hover:shadow-lg">
                     <value.icon className="w-10 h-10 text-primary-600 group-hover:scale-110 transition-transform duration-300" />
                   </div>
                 </div>
                 <h3 className="text-xl font-display font-bold text-gray-900 mb-4 group-hover:text-primary-600 transition-colors duration-300">
                   {value.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-gray-700 leading-relaxed">
                   {value.description}
                 </p>
               </motion.div>
@@ -155,22 +158,22 @@ export default function About() {
             
             {/* Stats Section */}
             <motion.div 
-              className="grid grid-cols-3 gap-6 mb-8 p-6 bg-white/60 rounded-2xl backdrop-blur-sm border border-gray-100"
+              className="grid grid-cols-3 gap-6 mb-8 p-6 bg-white/95 rounded-2xl backdrop-blur-sm border border-gray-200/80 shadow-lg"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={teamInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.8, delay: 1.6 }}
             >
               <div className="text-center">
                 <div className="text-2xl font-bold text-primary-600 mb-1">50+</div>
-                <div className="text-sm text-gray-600">Projects</div>
+                <div className="text-sm text-gray-700">Projects</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-primary-600 mb-1">5+</div>
-                <div className="text-sm text-gray-600">Years</div>
+                <div className="text-sm text-gray-700">Years</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-primary-600 mb-1">12+</div>
-                <div className="text-sm text-gray-600">Team</div>
+                <div className="text-sm text-gray-700">Team</div>
               </div>
             </motion.div>
             
@@ -179,7 +182,7 @@ export default function About() {
               {aboutImages.team.map((member, index) => (
                 <motion.div
                   key={index}
-                  className="flex items-center space-x-4 p-4 rounded-xl hover:bg-white/80 transition-all duration-300 border border-transparent hover:border-gray-100 hover:shadow-md backdrop-blur-sm"
+                  className="flex items-center space-x-4 p-4 rounded-xl bg-white/80 hover:bg-white transition-all duration-300 border border-gray-200/60 hover:border-gray-300 hover:shadow-md backdrop-blur-sm"
                   initial={{ opacity: 0, y: 20 }}
                   animate={teamInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.6, delay: 1.8 + index * 0.1 }}
@@ -215,9 +218,9 @@ export default function About() {
               
               {/* Overlay text */}
               <div className="absolute bottom-6 left-6 right-6">
-                <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-4 border border-gray-200/50">
+                <div className="bg-white/95 backdrop-blur-md rounded-2xl p-4 border border-gray-300/60 shadow-lg">
                   <p className="text-sm font-medium text-gray-900">Creative Excellence</p>
-                  <p className="text-xs text-gray-600 mt-1">Building digital experiences that matter</p>
+                  <p className="text-xs text-gray-700 mt-1">Building digital experiences that matter</p>
                 </div>
               </div>
             </div>
